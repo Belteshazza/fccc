@@ -1,0 +1,242 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+{% if invoice.paymentstatus == 1 and invoice.paymentmethod == 'Cash' or invoice.paymentmethod == 'Bank Transfer' %}
+{% if invoice.paymentevidence == NULL %}
+    <div class="card">
+
+        <div class="card-header bg-red font-white">
+            <h4>Upload payment evidence</h4>
+        </div>
+
+        <div class="card-body">
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+    {% else %}
+
+        <div class="card">
+
+            <div class="card-header bg-success font-white">
+                <button class="btn float-right btn-xs btn-primary btn-xs mr-2" onclick="printElem('pay_evidence');"><i class="fa fa-print"></i> Print</button>
+                <h4>Payment evidence</h4>
+            </div>
+
+            <div class="card-body" id="pay_evidence">
+
+              <img src="{{ asset(invoice.paymentevidence) }}" class="img-fluid">
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header bg-dark font-white">
+            <div class="float-right d-flex">
+                <button class="btn btn-xs btn-primary btn-xs mr-2" onclick="printElem('letter');"><i class="fa fa-print"></i> Print</button>
+
+                {% if invoice.paymentstatus == 0 %}
+                    <a href="{{ path('admin_pay_invoice_undertaken', { 'id':invoice.id }) }}" class="btn btn-xs btn-success mr-2"><i class="fa fa-file"></i> Pay with Undertaken</a>
+                    <a href="{{ path('admin_pay_invoice_cash', { 'id':invoice.id }) }}" class="btn btn-xs btn-success mr-2"><i class="fa fa-money"></i> Pay with Cash</a>
+                    <a href="{{ path('admin_pay_invoice_bank', { 'id':invoice.id }) }}" class="btn btn-xs btn-success"><i class="fa fa-institution"></i> Pay by Bank transfer</a>
+                {% endif %}
+
+            </div>
+            Invoice
+        </div>
+
+        <div class="card-body p-5">
+
+
+            <div id="letter">
+
+                <div class="p-5">
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <img src="{{ asset('assets/images/logo.png') }}" class="mb-5" style="max-width: 300px">
+
+                            <h1 class="text-primary">
+            <span>
+    {% if invoice.paymentstatus == 0 %}
+        Invoice
+    {% else %}
+        Receipt
+    {% endif %}
+            </span> #{{ invoice.id }}</h1>
+                            <p>{{ date }}</p>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="text-right">
+
+                                <h1>Pyrich Group Limited</h1>
+                                <p>
+                                    No 26 Jos Street,<br>
+                                    Area 3 Garki,<br>
+                                    Abuja.
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mt-5">
+
+                        <div class="col-4">
+                            <h4>{{ mda.name }}</h4>
+                            <p>{{ mda.address }}</p>
+                        </div>
+
+                        <div class="col-8">
+                            <div class="text-right">
+
+                                <b>Payment status</b>
+                                {% if invoice.paymentstatus == 0 %}
+                                    <h2 class="font-lg-3 text-danger text-uppercase font-weight-700">Not paid</h2>
+
+                                {% elseif invoice.paymentstatus == 1 %}
+
+                                    <h2 class="font-lg-3 text-success text-uppercase font-weight-700">Paid</h2>
+
+                                {% endif %}
+
+                                <br>
+                                <b>Payment method</b>
+                                <p class="font-lg-3 text-uppercase font-weight-700">{{ invoice.paymentmethod }}</p>
+                                {% if invoice.paymentmethod == 'Online' %}
+
+                                    Payment Reference: <span class="text-uppercase">{{ invoice.paymentid }}</span>
+
+                                {% endif %}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h3 class="page-title mt-5 ">{{ training.title }}</h3>
+                    <hr class="mb-5">
+
+                    <table class="table mt-4 mb-5 table-bordered">
+                        <thead>
+                        <th>S/N</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Sub-total</th>
+                        </thead>
+
+                        <tbody>
+
+                        {% if invoice.initialinvoice == 1 %}
+
+                            <tr>
+                                <td>1</td>
+                                <td>MDA Registration Fee</td>
+                                <td>1</td>
+                                <td>&#8358;{{ training.registrationfee|number_format }}</td>
+                                <td>&#8358;{{ training.registrationfee|number_format }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>Participant(s) Registration Fee</td>
+                                <td>{{ all_main_participants|number_format }}</td>
+                                <td>&#8358;{{ training.individualamount|number_format }}</td>
+                                <td>&#8358;{{ (training.individualamount * all_main_participants)|number_format }}</td>
+                            </tr>
+
+                            {% if all_extra_participants > 0 %}
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>Participant(s) Registration Fee</td>
+                                    <td>{{ all_extra_participants|number_format }}</td>
+                                    <td>&#8358;{{ training.extrapersonnelamount|number_format }}</td>
+                                    <td>&#8358;{{ (training.extrapersonnelamount * all_extra_participants)|number_format }}</td>
+                                </tr>
+
+                            {% endif %}
+
+                            <tr>
+                                <td colspan="4" class="text-right font-weight-600">Total</td>
+                                <td class="font-sm-4 text-success">&#8358;{{ invoice.paymentamount|number_format }}</td>
+                            </tr>
+
+                        {% else %}
+
+                            <tr>
+                                <td>1</td>
+                                <td>Extra Participant(s) Registration Fee</td>
+                                <td>{{ participants_count|number_format }}</td>
+                                <td>&#8358;{{ training.extrapersonnelamount|number_format }}</td>
+                                <td>&#8358;{{ (training.extrapersonnelamount * participants_count)|number_format }}</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="4" class="text-right font-weight-600">Total</td>
+                                <td class="font-sm-4 text-success">&#8358;{{ invoice.paymentamount|number_format }}</td>
+                            </tr>
+
+                        {% endif %}
+
+                        </tbody>
+                    </table>
+
+
+                    {% if invoice.paymentstatus == 0 %}
+
+                        <h4>For bank transfer and payment:</h4>
+                        <p>Please make payment to the following account:</p>
+
+
+                        <div class="row">
+                            <div class="col-3"><b>Acct Name:</b></div>
+                            <div class="col-8">PYRICH GROUP OF COMPANIES LTD.</div>
+
+                            <div class="col-3"><b>Acct Number:</b></div>
+                            <div class="col-8">1012835411</div>
+
+                            <div class="col-3"><b>TIN:</b></div>
+                            <div class="col-8">17780157-0001</div>
+
+                            <div class="col-3"><b>Bank Name:</b></div>
+                            <div class="col-8">Zenith Bank</div>
+
+                        </div>
+
+                        <img src="{{ asset('assets/images/pay_logo.png') }}" class="img-fluid mt-4 w-75">
+
+                    {% endif %}
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+        </ul>
+
+    </div>
+
+{% endblock %}

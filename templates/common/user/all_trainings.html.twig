@@ -1,0 +1,34 @@
+<table id="example" class="datatable table display table-striped table-hover" cellspacing="0" width="100%">
+    <thead >
+    <tr>
+        <th>Title</th>
+        <th>Venue</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Registration fee</th>
+        <th>Individual amount</th>
+        <th>Extra personel amount</th>
+        <th>Individuals per MDA</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for training in trainings %}
+        <tr>
+            <td>{{ training.title }}</td>
+            <td>{{ training.venue }}</td>
+            <td>{{ training.date|date("l, F j Y") }}</td>
+            <td>{{ training.time|date("H:i:s") }}</td>
+            <td>&#8358;{{ training.registration_fee|number_format }}</td>
+            <td>&#8358;{{ training.individual_amount|number_format }}</td>
+            <td>&#8358;{{ training.extra_personnel_amount|number_format }}</td>
+            <td>{{ training.individuals_per_mda }}</td>
+            <td>
+                <a href="{{ path('user_training_apply', { 'id' : training.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-check-circle"></i> Apply</a>
+
+            </td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>

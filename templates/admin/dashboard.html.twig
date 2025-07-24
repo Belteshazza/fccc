@@ -1,0 +1,108 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+    <section class="dashboard-counts p-0 mb-5">
+        <div class="container-fluid p-0">
+            <div class="row bg-white has-shadow">
+                <!-- Item -->
+                <div class="col-xl-4 col-sm-6">
+                    <a href="{{ path('admin_training') }}"><div class="item p-0 d-flex align-items-center">
+                        <div class="icon bg-blue"><i class="fa fa-book"></i></div>
+                        <div class="title font-sm-4"><span>Available<br>Trainings</span></div>
+                        <div class="number"><strong>{{ all_trainings }}</strong></div>
+                    </div></a>
+                </div>
+
+                <div class="col-xl-4 col-sm-6">
+                    <a href="{{ path('admin_mda') }}"><div class="item p-0 d-flex align-items-center">
+                        <div class="icon bg-orange"><i class="fa fa-users"></i></div>
+                        <div class="title font-sm-4"><span>MDAs</span></div>
+                        <div class="number"><strong>{{ all_mdas }}</strong></div>
+                        </div></a>
+                </div>
+
+                <div class="col-xl-4 col-sm-6">
+                    <a href="{{ path('admin_participants') }}"> <div class="item p-0 d-flex align-items-center">
+                        <div class="icon bg-red"><i class="fa fa-user"></i></div>
+                        <div class="title font-sm-4"><span>MDA<br>Admins</span></div>
+                        <div class="number"><strong>{{ all_mda_admins }}</strong></div>
+                        </div></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <div class="row">
+
+
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body text-center bg-dark text-white font-white">
+                    <b class="text-uppercase font-xs">Total expected payments</b>
+                    <p class="font-lg m-0 font-white">&#8358;{{ total_payment|number_format }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body text-center text-white bg-dark font-white">
+                    <b class="text-uppercase font-xs">Total payments received</b>
+                    <p class="font-lg m-0">&#8358;{{ (total_online_payment + total_cash_payment + total_bank_payment)|number_format }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body bg-dark text-center text-white font-white">
+                    <b class="text-uppercase font-xs">Total outstanding payments</b>
+                    <p class="font-lg m-0">&#8358;{{ total_outstanding_payment|number_format }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body bg-orange font-white text-white">
+                    <b class="text-uppercase font-xs">Total online payments</b>
+                    <p class="font-lg m-0">&#8358;{{ total_online_payment|number_format }}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body bg-green font-white">
+                    <b class="text-uppercase font-xs">Total cash payments</b>
+                    <p class="font-lg m-0">&#8358;{{ total_cash_payment|number_format }}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body bg-blue font-white">
+                    <b class="text-uppercase font-xs">Total bank payments</b>
+                    <p class="font-lg m-0">&#8358;{{ total_bank_payment|number_format }}</p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

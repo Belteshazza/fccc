@@ -1,0 +1,22 @@
+<?php //App%255CController%255CPagesController%2523generate_letter
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route')),
+    ],
+    null,
+    [
+        'Symfony\\Component\\Routing\\Annotation\\Route' => [
+            'path' => [
+                '/generate/letter/{mda}',
+            ],
+            'name' => [
+                'generate_letter_step_2',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

@@ -1,0 +1,99 @@
+{% extends 'user_base.html.twig' %}
+
+{% block body %}
+
+    <section class="dashboard-counts p-0 m-0">
+        <div class="container-fluid p-0">
+            <div class="row bg-white has-shadow">
+                <!-- Item -->
+                <div class="col-xl-4 col-sm-6">
+                    <div class="item p-0 d-flex align-items-center">
+                        <div class="icon bg-blue"><i class="fa fa-book"></i></div>
+                        <div class="title font-sm-4"><span>Available<br>Training</span></div>
+                    <div class="number"><strong>{{ trainings_available }}</strong></div>
+                  </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-6">
+                    <div class="item p-0 d-flex align-items-center">
+                        <div class="icon bg-orange"><i class="fa fa-users"></i></div>
+                        <div class="title font-sm-4"><span>Trainings<br>Applied For</span></div>
+                        <div class="number"><strong>{{ trainings_applied }}</strong></div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-6">
+                    <div class="item p-0 d-flex align-items-center">
+                        <div class="icon bg-red"><i class="fa fa-money"></i></div>
+                        <div class="title font-sm-4"><span>Pending<br>Invoice(s)</span></div>
+                        <div class="number"><strong>{{ pending_invoice }}</strong></div>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+
+    <div class="row mt-5">
+
+        <div class="col-lg-6">
+
+            <div class="articles card">
+
+                <div class="card-header bg-dark font-white">
+                    Registered Participants
+                </div>
+                <div class="card-body p-0">
+
+                    {% if training_participants|length >= 1 %}
+                    {% for participant in training_participants %}
+
+                        <div class="item d-flex align-items-center">
+                            <div class="text">
+                                <div class="badge badge-success float-right">{{ participant.session_name }}</div>
+                                <h5 class="font-weight-500">{{ participant.name }}</h5>
+                                <small>{{ participant.training_title }}.</small>
+
+                            </div>
+                        </div>
+
+
+                    {% endfor %}
+                        {% else %}
+
+                            <div class="text-center font-lg p-5">
+                                <p>No registered participant</p>
+
+                            </div>
+
+                            {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+
+    <div class="col-lg-6">
+
+        <div class="card">
+
+            <div class="card-header bg-dark font-white">
+                <h4>MDA</h4>
+            </div>
+            <div class="card-body">
+
+                <h2 class="font-lg">{{ mda.name }}</h2>
+                <p class="m-0"><b class="text-primary">MDA Code:</b> {{ mda.mdacode }}</p>
+                <p><b class="text-primary">Address:</b> {{ mda.address }}</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock %}

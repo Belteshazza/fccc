@@ -1,0 +1,166 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+    <div class="float-right mb-4">
+        <a href="{{ path('admin_view_training', {'id': training.id}) }}" class="btn btn-xs btn-warning mt-1"><i class="fa fa-chevron-circle-left"></i> Back to training</a>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="card">
+        <div class="card-header bg-dark font-white p-3 font-sm-4">
+            {{ training.title }}
+        </div>
+        <div class="card-body ">
+            <h3>{{ training_session.name }}</h3>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="card">
+        <div class="card-header ">
+            <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-registered-tab" data-toggle="pill" href="#pills-registered" role="tab" aria-controls="pills-home" aria-selected="true">Registered participants</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-attended-tab" data-toggle="pill" href="#pills-attended" role="tab" aria-controls="pills-profile" aria-selected="false">Participants who attended</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="card-body">
+
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-registered" role="tabpanel" aria-labelledby="pills-home-tab">
+
+
+                    <table id="example" class="datatable table display table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                        <thead >
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>MDA</th>
+                            <th>Session</th>
+                            <th>Attended</th>
+                            <th>Payment status</th>
+                            <th>Invoice</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for participant in training_participants %}
+                            <tr>
+                                <td>{{ participant.name }}</td>
+                                <td>{{ participant.email }}</td>
+                                <td>{{ participant.phone }}</td>
+                                <td>{{ participant.mda }}</td>
+                                <td>{{ participant.session }}</td>
+                                <td>
+                                    {% if participant.attended == 0 %}
+
+                                        No
+                                    {% else %}
+
+                                        Yes
+
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if participant.payment_status == 0 %}
+
+                                        <span class="text-danger">Not paid</span>
+
+                                    {% else %}
+
+                                        <span class="text-success">Paid</span>
+
+                                    {% endif %}
+                                </td>
+                                <td>#{{ participant.invoice_id }}</td>
+                                <td>
+
+                                    {% if participant.payment_status == 0 %}
+
+                                        <a href="{{ path('user_view_invoice', { 'id':participant.invoice_id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i> View invoice</a>
+
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <div class="tab-pane fade" id="pills-attended" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+
+                    <table id="example" class="datatable table display table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                        <thead >
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>MDA</th>
+                            <th>Session</th>
+                            <th>Attended</th>
+                            <th>Payment status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for participant in attended_participants %}
+                            <tr>
+                                <td>{{ participant.name }}</td>
+                                <td>{{ participant.email }}</td>
+                                <td>{{ participant.phone }}</td>
+                                <td>{{ participant.mda }}</td>
+                                <td>{{ participant.session }}</td>
+                                <td>
+                                    {% if participant.attended == 0 %}
+
+                                        No
+                                    {% else %}
+
+                                        Yes
+
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if participant.payment_status == 0 %}
+
+                                        <span class="text-danger">Not paid</span>
+
+                                    {% else %}
+
+                                        <span class="text-success">Paid</span>
+
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+{% endblock %}

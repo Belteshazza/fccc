@@ -1,0 +1,56 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+   <div class="card">
+      <div class="card-header  align-items-center">
+         <div class="float-right"><a href="{{ path('admin_add_training') }}" class="btn btn-xs btn-success"><i class="fa fa-plus"></i> Add new</a></div>
+         <h4>All trainings</h4>
+
+
+      </div>
+      <div class="card-body">
+
+         <table id="example" class="datatable table display table-striped table-hover" cellspacing="0" width="100%">
+            <thead >
+            <tr>
+               <th>Title</th>
+               <th>Venue</th>
+               <th>Date</th>
+               <th>Time</th>
+                <th>Registration fee</th>
+               <th>Individual amount</th>
+               <th>Extra personel amount</th>
+               <th>Individuals per MDA</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for training in trainings %}
+                <tr>
+                    <td>{{ training.title }}</td>
+                    <td>{{ training.venue }}</td>
+                    <td>{{ training.date|date("l, F j Y") }}</td>
+                    <td>{{ training.time|date("H:i:s") }}</td>
+                    <td>&#8358;{{ training.registrationfee|number_format }}</td>
+                    <td>&#8358;{{ training.individualamount|number_format }}</td>
+                    <td>&#8358;{{ training.extrapersonnelamount|number_format }}</td>
+                    <td>{{ training.individualspermda }}</td>
+                    <td>
+                        <a href="{{ path('admin_view_training', {'id': training.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-search"></i> View</a>
+                        <a href="{{ path('admin_edit_training', {'id': training.id}) }}" class="btn btn-xs btn-warning mt-1"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="{{ path('admin_delete_training', {'id': training.id}) }}" class="btn btn-xs btn-danger mt-1"><i class="fa fa-pencil"></i> Delete</a>
+                        <a href="{{ path('admin_link_training', {'id': training.id}) }}" class="btn btn-xs btn-success mt-1"><i class="fa fa-link"></i> Link training</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+         </table>
+
+      </div>
+   </div>
+
+
+
+{% endblock %}

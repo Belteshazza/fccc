@@ -1,0 +1,22 @@
+<?php //App%255CController%255CUserController%2523user_viewtraining
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route')),
+    ],
+    null,
+    [
+        'Symfony\\Component\\Routing\\Annotation\\Route' => [
+            'path' => [
+                '/user/training/{id}',
+            ],
+            'name' => [
+                'user_view_training',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

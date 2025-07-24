@@ -1,0 +1,56 @@
+{% extends 'access_base.html.twig' %}
+
+{% block content %}
+
+    <div class="row p-4">
+
+
+        <div class="col-lg-5 mx-auto">
+
+            <div class="p-4">
+                <h4 class="mb-5">Verify MDA Information</h4>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+
+
+                {% for flashMessage in app.session.flashbag.get('mda_name') %}
+
+                    <div class="text-center border border_radius mt-3 bg-gray p-3">
+                        {% if flashMessage != 'MDA Not Found' %}
+                        <p class="m-0">MDA Name:</p>
+                        {% endif %}
+                   <h4>{{ flashMessage }}</h4>
+                    {% if flashMessage != 'MDA Not Found' %}
+                        {% if result <= 0 %}
+
+                            <a href="{{ path('register', {'mda_code': last_code }) }}">Register for this MDA</a>
+
+                            {% else %}
+
+                            <p class="text-danger m-0">Another admin user is registered for this MDA. Please send an email to fcctraining@pglnigeria.com for more information</p>
+
+                        {% endif %}
+                    {% endif %}
+                    </div>
+
+
+
+
+                {% endfor %}
+
+
+
+                <p class="hline font-gray margin_20-top margin_20-bottom"> OR </p>
+
+
+                <div class="text-center">
+                    Click <a href='{{ path('login') }}'>here</a> login to your account
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

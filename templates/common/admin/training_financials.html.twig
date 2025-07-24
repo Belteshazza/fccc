@@ -1,0 +1,139 @@
+<div class="row text-white text-center">
+
+
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-body text-center text-white bg-dark font-white">
+                <b class="text-uppercase font-xs">Total expected payments</b>
+                <p class="font-lg m-0">&#8358;{{ total_payment|number_format }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-body text-center text-white bg-dark font-white">
+                <b class="text-uppercase font-xs">Total payments received</b>
+                <p class="font-lg m-0">&#8358;{{ (total_online_payment + total_cash_payment + total_bank_payment)|number_format }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-body bg-dark text-center text-white font-white">
+                <b class="text-uppercase font-xs">Total outstanding payments</b>
+                <p class="font-lg m-0">&#8358;{{ total_outstanding_payment|number_format }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-body bg-orange text-white font-white">
+                <b class="text-uppercase font-xs">Total online payments</b>
+                <p class="font-lg m-0">&#8358;{{ total_online_payment|number_format }}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-body bg-green text-white font-white">
+                <b class="text-uppercase font-xs">Total cash payments</b>
+                <p class="font-lg m-0">&#8358;{{ total_cash_payment|number_format }}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-body bg-blue text-white font-white">
+                <b class="text-uppercase font-xs">Total bank payments</b>
+                <p class="font-lg m-0">&#8358;{{ total_bank_payment|number_format }}</p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        Invoice(s)
+    </div>
+
+    <div class="card-body">
+
+        <table id="example" class="datatable table display table-bordered table-striped table-hover" cellspacing="0" width="100%">
+            <thead >
+            <tr>
+                <th>Invoice ID</th>
+                <th>Payment ID</th>
+                <th>MDA</th>
+                <th>Payment amount</th>
+                <th>Payment method</th>
+                <th>Payment status</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for invoice in invoices %}
+
+                <tr>
+                    <td>#{{ invoice.id }}</td>
+                    <td>{{ invoice.paymentid }}</td>
+                    <td>{{ invoice.mda }}</td>
+                    <td>&#8358;{{ invoice.paymentamount|number_format }}</td>
+                    <td>{{ invoice.paymentmethod }}</td>
+                    <td>
+                        {% if invoice.paymentstatus == 0 %}
+
+                            <span class="text-danger">Not paid</span>
+
+                        {% elseif invoice.paymentstatus == 1 %}
+
+                            <span class="text-success">Paid</span>
+
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if invoice.paymentstatus == '1' %}
+
+                            <a href="{{ path('admin_view_invoice', { 'id':invoice.id }) }}" class="btn btn-success btn-xs"><i class="fa fa-search"></i> View Receipt</a>
+
+                        {% else %}
+
+                            <a href="{{ path('admin_view_invoice', { 'id':invoice.id }) }}" class="btn btn-info btn-xs"><i class="fa fa-search"></i> View Invoice</a>
+
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+
+
+    </ul>
+
+</div>

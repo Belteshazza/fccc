@@ -1,0 +1,215 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+
+  <div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card">
+
+            <div class="card-header bg-dark font-white">
+                <h4>Register participants for training</h4>
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST" action="{{ path('admin_register_training_participant') }}">
+
+                    <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>MDA</label><br>
+                        <select name="mda" class="form-control bg-gray">
+                            <optgroup label="Selected">
+                                <option value="{{ mda.id }}">{{ mda.name }}</option>
+                            </optgroup>
+                            <optgroup label="Available">
+                            {% for mda in mdas %}
+                                <option value="{{ mda.id }}">{{ mda.name }}</option>
+                            {% endfor %}
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Training</label><br>
+                        <select name="training" class="form-control">
+                            <optgroup label="Selected">
+                                <option value="{{ training.id }}">{{ training.title }}</option>
+                            </optgroup>
+                            <optgroup label="Available">
+                            {% for training in trainings %}
+                                <option value="{{ training.id }}">{{ training.title }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+      <div class="col-md-6">
+          <div class="card">
+              <div class="card-header bg-dark text-white">
+                  <h5>Register new participant</h5>
+              </div>
+          <div class="card-body">
+              <form method="POST">
+
+                  <div class="form-group">
+                      <label>Participant name</label>
+                      <input type="text" class="form-control" required="required" name="participants">
+                  </div>
+
+                  <div class="form-group">
+                      <label>Participant email</label>
+                      <input type="email" class="form-control" required="required" name="participants_email">
+                  </div>
+
+                  <div class="form-group">
+                      <label>Participant phone</label>
+                      <input type="text" class="form-control" onkeypress="return isNumber(event)" name="participants_phone">
+                  </div>
+
+                  <div class="form-group">
+                      <label>Select a session</label>
+                      <select required="required" name="participants_session" class="form-control">
+                          <option disabled selected value="">-- Select a session --</option>
+                          {% for session in training_sessions %}
+
+                              <option value="{{ session.id }}">{{ session.name }} - {{ session.startdate|date("d M, Y") }} till {{ session.enddate|date("d M, Y") }}</option>
+
+                          {% endfor %}
+                      </select>
+                  </div>
+
+                  <button class="btn btn-block btn-primary">Submit</button>
+              </form>
+          </div>
+          </div>
+
+
+
+          <div class="card">
+              <div class="card-header bg-dark text-white">
+                  <h5>Register for refresher training</h5>
+              </div>
+              <div class="card-body">
+                  {% if participants|length <= 0 %}
+
+                  <form method="POST" action="{{ path('admin_register_refresher_training_participant_session', {'mda_id':mda.id,'training_id':training.id}) }}">
+
+                      {% for attendee in previous_attendees %}
+
+                          <div class="bg-gray mb-2 p-2">
+                      <div class="form-group">
+                          <label>Participant name</label>
+                          <input type="text" class="form-control" required="required" name="participants[]" value="{{ attendee.participantname }}">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Participant email</label>
+                          <input type="email" class="form-control" required="required" name="participants_email[]" value="{{ attendee.participantemail }}">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Participant phone</label>
+                          <input type="text" class="form-control" onkeypress="return isNumber(event)" name="participants_phone[]" value="{{ attendee.participantphone }}">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Select a session</label>
+                          <select required="required" name="participants_session" class="form-control">
+                              <option disabled selected value="">-- Select a session --</option>
+                              {% for session in training_sessions %}
+
+                                  <option value="{{ session.id }}">{{ session.name }} - {{ session.startdate|date("d M, Y") }} till {{ session.enddate|date("d M, Y") }}</option>
+
+                              {% endfor %}
+                          </select>
+                      </div>
+                          </div>
+{% endfor %}
+                      <button class="btn btn-block btn-primary">Submit</button>
+                  </form>
+                      {% else %}
+
+                          <div class="p-5 text-center lead">
+                              <img src="{{ asset('assets/images/empty.png') }}">
+                              <p>Participants are already registered for this training</p>
+                          </div>
+                          {% endif %}
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-6">
+          <div class="card">
+              <div class="card-header bg-dark text-white">
+                  <h5>MDA Participants registered for this training</h5>
+              </div>
+              <div class="card-body">
+
+                  {% for participant in participants %}
+
+                      <h5>{{ participant.participantname }}</h5>
+                      <p class="m-0">{{ participant.participantemail }}</p>
+                      <p class="m-0">{{ participant.participantphone }}</p>
+                      <a href="{{ path('admin_edit_participant', {'id':participant.id, 'training_id':training.id}) }}" class="btn btn-warning btn-xs mt-2"><i class="fa fa-pencil"></i> Edit</a>
+                      <a href="{{ path('admin_delete_participant', {'id':participant.id}) }}" class="btn btn-danger btn-xs mt-2"><i class="fa fa-close"></i> Delete</a>
+                      <hr>
+                      {% else %}
+
+                      <div class="p-5 text-center lead text-danger">
+                          No participant found
+                      </div>
+
+                      {% endfor %}
+              </div>
+          </div>
+
+
+          <div class="card top_buffer">
+              <div class="card-header bg-dark text-white">
+                  <h5>Invoices</h5>
+              </div>
+              <div class="card-body">
+
+                  {% for invoice in invoices %}
+
+                          {% if invoice.paymentstatus == 0 %}
+                              <label class="pull-right badge text-white bg-danger"> Not paid</label>
+                              {% else %}
+                                  <label class="pull-right badge text-white bg-success">Paid</label>
+                                  {% endif %}
+                      <h5>Invoice #{{ invoice.id }}</h5>
+                      <p class="m-0 text-success">&#8358;{{ invoice.paymentamount|number_format }}</p>
+
+                      <hr>
+                  {% else %}
+
+                      <div class="p-5 text-center lead text-danger">
+                          No invoice found
+                      </div>
+
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+
+{% endblock %}

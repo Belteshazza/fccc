@@ -1,0 +1,22 @@
+<?php //App%255CController%255CAccessController%2523reset_password2
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route')),
+    ],
+    null,
+    [
+        'Symfony\\Component\\Routing\\Annotation\\Route' => [
+            'path' => [
+                '/reset_password/{id}',
+            ],
+            'name' => [
+                'reset_password_2',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

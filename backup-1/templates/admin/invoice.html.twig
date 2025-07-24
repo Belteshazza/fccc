@@ -1,0 +1,74 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            Invoice(s)
+        </div>
+
+        <div class="card-body">
+
+            <table id="example" class="datatable table display table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                <thead >
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Payment ID</th>
+                    <th>MDA</th>
+                    <th>Payment amount</th>
+                    <th>Payment method</th>
+                    <th>Payment status</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for invoice in invoices %}
+
+                    <tr>
+                        <td>#{{ invoice.id }}</td>
+                        <td>{{ invoice.paymentid }}</td>
+                        <td>{{ invoice.mda }}</td>
+                        <td>&#8358;{{ invoice.paymentamount|number_format }}</td>
+                        <td>{{ invoice.paymentmethod }}</td>
+                        <td>
+                            {% if invoice.paymentstatus == 0 %}
+
+                                <span class="text-danger">Not paid</span>
+
+                            {% elseif invoice.paymentstatus == 1 %}
+
+                                <span class="text-success">Paid</span>
+
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invoice.paymentstatus == '1' %}
+
+                                <a href="{{ path('admin_view_invoice', { 'id':invoice.id }) }}" class="btn btn-success btn-xs"><i class="fa fa-search"></i> View Receipt</a>
+
+                            {% else %}
+
+                                <a href="{{ path('admin_view_invoice', { 'id':invoice.id }) }}" class="btn btn-info btn-xs"><i class="fa fa-search"></i> View Invoice</a>
+
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+
+
+        </ul>
+
+    </div>
+
+{% endblock %}

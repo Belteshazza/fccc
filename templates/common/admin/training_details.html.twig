@@ -1,0 +1,38 @@
+<div class="card">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <b>Venue:</b> {{ training.venue }}
+        </li>
+
+        <li class="list-group-item">
+            <b>Date:</b> {{ training.date|date("l, F j Y") }}
+        </li>
+
+        <li class="list-group-item">
+            <b>Time:</b> {{ training.time|date("H:i:s") }}
+        </li>
+
+        <li class="list-group-item">
+            <b>Venue:</b> {{ training.venue }}
+        </li>
+
+        <li class="list-group-item">
+            <b>MDA Registration Fee:</b> &#8358;{{ training.registrationfee|number_format }}
+        </li>
+
+         <li class="list-group-item">
+            <b>Individual Amount:</b> &#8358;{{ training.individualamount|number_format }}
+        </li>
+
+        <li class="list-group-item">
+            <b>Extra personnel Amount:</b> &#8358;{{ training.extrapersonnelamount|number_format }}
+        </li>
+
+        <li class="list-group-item">
+            <b>Individuals per MDA:</b> {{ training.individualspermda|number_format }}
+        </li>
+
+    </ul>
+
+
+</div>

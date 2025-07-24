@@ -1,0 +1,56 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+
+            <div class="card-body">
+
+            {{ form(form) }}
+
+            </div>
+        </div>
+
+    </div>
+
+
+      <div class="col-md-6">
+
+          <div class="card">
+
+              <div class="card-header bg-dark font-white">
+                  <h4>MDAs allowed to bring single participant</h4>
+              </div>
+
+
+              <div class="card-body">
+
+                  <ul class="list-group list-group-flush">
+
+                      {% for data in participants_allowed %}
+
+                          <li class="list-group-item">
+                              <a href="{{ path('admin_delete_participant_allowed', { 'id':data.id }) }}" class="btn btn-xs btn-danger float-right"><i class="fa fa-close"></i> Delete</a>
+                              <h4>{{ data.mdaid.name }}</h4>
+                              <p>{{ data.trainingid.title }}</p>
+                              <p class="font-xs font-gray">Participants allowed: {{ data.allowedparticipants }}</p>
+                          </li>
+
+                      {% endfor %}
+                  </ul>
+
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,81 @@
+html {
+  font-size: 88%; }
+
+.btn-xs {
+  padding: 3px 10px !important;
+  font-size: .92em !Important; }
+
+.line-height {
+  line-height: 25px; }
+
+header .navbar-nav .nav-item {
+  border-radius: 6px; }
+  header .navbar-nav .nav-item.active {
+    background: rgba(255, 255, 255, 0.7) !important; }
+    header .navbar-nav .nav-item.active a {
+      color: #000 !Important; }
+  header .navbar-nav .nav-item:hover {
+    background: rgba(0, 0, 0, 0.2); }
+  header .navbar-nav .nav-item a {
+    padding: 5px 10px !Important;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #fff !Important; }
+
+.dataTables_wrapper .dt-buttons {
+  margin-bottom: 10px !important; }
+.dataTables_wrapper .dataTables_length {
+  margin-bottom: -50px !important; }
+
+.hline {
+  overflow: hidden;
+  text-align: center; }
+
+.hline:before, .hline:after {
+  background-color: gainsboro;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%; }
+
+.hline:before {
+  right: 0.5em;
+  margin-left: -50%; }
+
+.hline:after {
+  left: 0.5em;
+  margin-right: -50%; }
+
+@media print {
+  * {
+    font-family: "Times New Roman" !important; }
+
+  body {
+    font-size: 16px !Important;
+    padding: 50px !Important; }
+
+ /* #letter {
+    position: absolute !Important;
+    left: 0 !Important;
+    width: 100vw !Important;
+
+    border:none;
+    top: 0 !important;
+  }
+*/
+  .font-weight-900 {
+    font-weight: 900 !Important; }
+
+  body p font, p font b, p b u, p b {
+    font-family: "Times New Roman" !important;
+    font-size: 16px !Important; }
+
+  img {
+    font-family: "Times New Roman" !important;
+    -webkit-print-color-adjust: exact !Important;
+    font-size: 14px !Important;
+    margin-bottom: 20px !Important; } }
+
+/*# sourceMappingURL=style.css.map */

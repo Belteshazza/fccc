@@ -1,0 +1,24 @@
+<nav class="side-navbar">
+    <!-- Sidebar Header-->
+    <div class="sidebar-header bg-blue bg-transparent_black_3 m-3 p-2 border_radius d-flex align-items-center">
+        <div class="avatar"><img src="{{ asset('asset2/img/user-blue.jpg') }}" alt="..." class="img-fluid rounded-circle"></div>
+        <div class="title">
+            <p class="font-black">User:</p>
+            <h1 class="font-sm-3">{{ user.username }}</h1>
+
+        </div>
+    </div>
+    <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+    <ul class="list-unstyled">
+        <li class="{% if page_title == 'Dashboard' %} active {% endif %}"><a href="{{ path('user_dashboard') }}"> <i class="icon-home"></i>Dashboard </a></li>
+        <li class="{% if page_title == 'MDA' %} active {% endif %}"><a href="{{ path('user_mda') }}"> <i class="fa fa-institution"></i>MDA info. </a></li>
+        <li class="{% if page_title == 'Training' %} active {% endif %}"><a href="{{ path('user_trainings') }}"> <i class="fa fa-television"></i>Trainings </a></li>
+        <li class="{% if page_title == 'Invoice' %} active {% endif %}"><a href="{{ path('user_invoice') }}"> <i class="fa fa-bar-chart-o"></i>Invoice </a></li>
+
+
+    </ul><span class="heading">Extras</span>
+    <ul class="list-unstyled">
+        <li class="{% if page_title == 'Account' %} active {% endif %}"><a href="{{ path('user_account') }}"> <i class="fa fa-user"></i> Account </a></li>
+
+    </ul>
+</nav>

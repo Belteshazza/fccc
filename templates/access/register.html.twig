@@ -1,0 +1,36 @@
+{% extends 'access_base.html.twig' %}
+
+{% block content %}
+
+    <div class="row p-4">
+
+
+        <div class="col-lg-5 mx-auto">
+
+
+
+
+
+            <div class="p-4">
+                <h4 class="mb-5">Register MDA</h4>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+
+
+
+
+
+                <p class="hline font-gray margin_20-top margin_20-bottom"> OR </p>
+
+
+                <div class="text-center">
+                    Click <a href='{{ path('login') }}'>here</a> login to your account
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

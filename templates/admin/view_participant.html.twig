@@ -1,0 +1,70 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+
+
+    <div class="row">
+
+        <div class="col-lg-8">
+
+
+            <div class="checklist card">
+                <div class="card-header bg-dark font-white">
+                    <h4>{{ participant.firstname }} {{ participant.lastname }}</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="item">
+                        <b>First name:</b> <span class="float-right">{{ participant.firstname }}</span>
+                    </div>
+                    <div class="item">
+                        <b>Last name:</b> <span class="float-right">{{ participant.lastname }}</span>
+                    </div>
+                    <div class="item">
+                        <b>Phone:</b> <span class="float-right">{{ participant.phone }}</span>
+                    </div>
+                    <div class="item">
+                        <b>Email:</b> <span class="float-right">{{ participant.email }}</span>
+                    </div>
+                </div>
+            </div>
+
+                <div class="checklist card">
+                    <div class="card-header bg-primary font-white">
+                        <h4>MDA information</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="item">
+                            <b>MDA code:</b> <span class="badge badge-danger font-sm float-right">{{ mda.mdacode }}</span>
+                        </div>
+                        <div class="item">
+                            <b>Name:</b> <span class="float-right">{{ mda.name }}</span>
+                        </div>
+                        <div class="item">
+                            <b>Address:</b> <span class="float-right">{{ mda.address }}</span>
+                        </div>
+                        <div class="item">
+                            <b>Phone:</b> <span class="float-right">{{ mda.phone }}</span>
+                        </div>
+                        <div class="item">
+                            <b>Email:</b> <span class="float-right">{{ mda.email }}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        </div>
+
+
+
+
+        <div class="col-lg-3">
+
+
+
+        </div>
+
+    </div>
+
+{% endblock %}

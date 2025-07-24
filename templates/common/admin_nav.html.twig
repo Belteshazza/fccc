@@ -1,0 +1,54 @@
+<nav class="side-navbar">
+    <!-- Sidebar Header-->
+    <div class="sidebar-header bg-transparent_black_3 m-3 p-2 border_radius d-flex align-items-center">
+        <div class="avatar"><img src="{{ asset('asset2/img/user-blue.jpg') }}" alt="..." class="img-fluid rounded-circle"></div>
+        <div class="title">
+            <p class="font-black">Logged in as</p>
+            <h1 class="font-sm-3">{{ user.username }}</h1>
+
+        </div>
+    </div>
+    <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+    <ul class="list-unstyled">
+        <li class="{% if page_title == 'Dashboard' %} active {% endif %}"><a href="{{ path('admin_dashboard') }}"> <i class="icon-home"></i>Dashboard </a></li>
+
+        {% for privilege in privileges %}
+            {% if privilege == 'mda' %}
+                <li class="{% if page_title == 'MDAs' %} active {% endif %}"><a href="{{ path('admin_mda') }}"> <i class="fa fa-th-list"></i>MDAs </a></li>
+            {% endif %}
+
+            {% if privilege == 'mda_admin' %}
+                <li class="{% if page_title == 'MDA Admins' %} active {% endif %}"><a href="{{ path('admin_participants') }}"> <i class="fa fa-users"></i>MDA Admins </a></li>
+            {% endif %}
+
+            {% if privilege == 'training' %}
+                <li class="{% if page_title == 'Training' %} active {% endif %}"><a href="{{ path('admin_training') }}"> <i class="fa fa-television"></i>Trainings </a></li>
+                <li class="{% if page_title == 'Register Training Participants' %} active {% endif %}"><a href="{{ path('admin_register_training_participant') }}"> <i class="fa fa-file-o"></i>Register Participants </a></li>
+                <li class="{% if page_title == 'Invoice' %} active {% endif %}"><a href="{{ path('admin_invoice') }}"> <i class="fa fa-bar-chart-o"></i>Invoice </a></li>
+            {% endif %}
+
+
+
+            {% if privilege == 'participants_allowed' %}
+                <li class="{% if page_title == 'MDA Participants Allowed' %} active {% endif %}"><a href="{{ path('admin_participants_allowed') }}"> <i class="fa fa-user-circle-o"></i>MDA Participants allowed </a></li>
+            {% endif %}
+
+        {% endfor %}
+
+
+
+
+
+
+
+
+    </ul><span class="heading">Extras</span>
+    <ul class="list-unstyled">
+        <li class="{% if page_title == 'Account' %} active {% endif %}"><a href="{{ path('admin_account') }}"> <i class="fa fa-user"></i> My Account </a></li>
+        {% for privilege in privileges %}
+            {% if privilege == 'admins' %}
+                <li class="{% if page_title == 'Admin Users' %} active {% endif %}"> <a href="{{ path('admin_users') }}"> <i class="fa fa-users"></i>Admin Users</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

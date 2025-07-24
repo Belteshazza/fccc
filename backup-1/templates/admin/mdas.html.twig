@@ -1,0 +1,46 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+            <div class="card-header  align-items-center">
+                <div class="float-right"><a href="{{ path('add_mda') }}" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Add new</a></div>
+                <h4>All registered MDAs</h4>
+
+
+            </div>
+            <div class="card-body">
+
+                <table id="example" class="datatable table display table-striped table-hover" cellspacing="0" width="100%">
+                    <thead >
+                    <tr>
+                        <th>MDA Code</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Participants registered</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mda in mdas %}
+                        <tr>
+                            <td>{{ mda.mda_code }}</td>
+                            <td>{{ mda.name }}</td>
+                            <td>{{ mda.email }}</td>
+                            <td>{{ mda.phone }}</td>
+                            <td>{{ mda.address }}</td>
+                            <td><a href="{{ path('admin_edit_mda', { 'id':mda.id }) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> Edit</a></td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+    </div>
+
+
+
+{% endblock %}

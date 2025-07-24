@@ -1,0 +1,190 @@
+{% extends'user_base.html.twig' %}
+
+{% block body %}
+
+
+
+    <div class="card">
+
+        <div class="card-body bg-dark font-white">
+            <h2 class="mb-0">{{ training.title }}</h2>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <b>Venue:</b> {{ training.venue }}
+            </li>
+
+            <li class="list-group-item">
+                <b>Date:</b> {{ training.date|date("l, F j Y") }}
+            </li>
+
+            <li class="list-group-item">
+                <b>Time:</b> {{ training.time|date("H:i:s") }}
+            </li>
+
+            <li class="list-group-item">
+                <b>Venue:</b> {{ training.venue }}
+            </li>
+
+            <li class="list-group-item">
+                <b>MDA Registration Fee:</b> &#8358;{{ training.registrationfee|number_format }}
+            </li>
+
+            <li class="list-group-item">
+                <b>Individual Amount:</b> &#8358;{{ training.individualamount|number_format }}
+            </li>
+
+            <li class="list-group-item">
+                <b>Extra personnel Amount:</b> &#8358;{{ training.extrapersonnelamount|number_format }}
+            </li>
+
+            <li class="list-group-item">
+                <b>Individuals per MDA:</b> {{ training.individualspermda|number_format }}
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+             <div class="card">
+                 <div class="card-header">
+                     <a href="{{ path('user_training_apply', { 'id':training.id }) }}" class="btn btn-xs float-right btn-success"><i class="fa fa-plus"></i> Add more participants</a>
+                     Registered participants
+                 </div>
+                 <div class="card-body">
+
+                     <table id="example" class="datatable table display table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                         <thead >
+                         <tr>
+                             <th>Name</th>
+                             <th>Email</th>
+                             <th>Phone</th>
+                             <th>Session</th>
+                             <th>Attended</th>
+                             <th>Payment status</th>
+                             <th>Invoice</th>
+                             <th>Options</th>
+                         </tr>
+                         </thead>
+                         <tbody>
+                         {% for participant in training_participants %}
+                             <tr>
+                                 <td>{{ participant.name }}</td>
+                                 <td>{{ participant.email }}</td>
+                                 <td>{{ participant.phone }}</td>
+                                 <td>{{ participant.session }}</td>
+                                 <td>
+                                  {% if participant.attended == 0 %}
+
+                                      No
+                                  {% else %}
+
+                                      Yes
+
+                                  {% endif %}
+                                 </td>
+                                 <td>
+                                     {% if participant.payment_status == 0 %}
+
+                                         <span class="text-danger">Not paid</span>
+
+                                     {% else %}
+
+                                         <span class="text-success">Paid</span>
+
+                                     {% endif %}
+                                 </td>
+                                 <td>#{{ participant.invoice_id }}</td>
+                                 <td>
+
+                                     {% if participant.payment_status == 0 %}
+
+                                       <a href="{{ path('user_view_invoice', { 'id':participant.invoice_id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i> View invoice</a>
+
+                                     {% endif %}
+                                 </td>
+                             </tr>
+
+                         {% endfor %}
+                         </tbody>
+                     </table>
+
+                 </div>
+             </div>
+
+
+
+            <div class="card">
+                <div class="card-header">
+                    Invoice(s)
+                </div>
+
+                <div class="card-body">
+
+                    <table id="example" class="datatable table display table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                        <thead >
+                        <tr>
+                            <th>Invoice ID</th>
+                            <th>Payment ID</th>
+                            <th>Payment amount</th>
+                            <th>Payment method</th>
+                            <th>Payment status</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for invoice in invoices %}
+
+                        <tr>
+                            <td>#{{ invoice.id }}</td>
+                            <td>{{ invoice.paymentid }}</td>
+                            <td>&#8358;{{ invoice.paymentamount|number_format }}</td>
+                            <td>{{ invoice.paymentmethod }}</td>
+                            <td>
+                                {% if invoice.paymentstatus == 0 %}
+
+                                    <span class="text-danger">Not paid</span>
+
+                                {% elseif invoice.paymentstatus == 1 %}
+
+                                    <span class="text-success">Paid</span>
+
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if invoice.paymentstatus == '1' %}
+
+                                    <a href="{{ path('user_view_invoice', { 'id':invoice.id }) }}" class="btn btn-success btn-xs"><i class="fa fa-search"></i> View Receipt</a>
+
+                                    {% else %}
+
+                                <a href="{{ path('user_view_invoice', { 'id':invoice.id }) }}" class="btn btn-info btn-xs"><i class="fa fa-search"></i> View Invoice</a>
+
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+
+
+
+                </ul>
+
+            </div>
+
+
+
+
+
+{% endblock %}

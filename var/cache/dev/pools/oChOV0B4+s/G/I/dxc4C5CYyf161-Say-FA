@@ -1,0 +1,22 @@
+<?php //App%255CController%255CAdminController%2523admin_view_invoice
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route')),
+    ],
+    null,
+    [
+        'Symfony\\Component\\Routing\\Annotation\\Route' => [
+            'path' => [
+                '/admin/invoice/{id}',
+            ],
+            'name' => [
+                'admin_view_invoice',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

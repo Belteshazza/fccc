@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="col-sm-8 margin_100  mx-auto">
+
+            <div class="font-xl">
+
+                <img src="{{ asset('assets/images/logo.png') }}" class="mb-5" style="max-width: 300px">
+                    <h1 class="font-xl-3 font-weight-100 font-red">Error {{ status_code }}</h1>
+                <p class="font-xl">{{ status_text }}. Click here to <a href="javascript: window.history.go(-1)">Go back</a></p>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'user_base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+
+            <h2>{{ training.title }}</h2>
+
+            <hr>
+
+            <div class="card">
+
+                <div class="card-header bg-dark text-white font-white">
+                    <h4>Training application</h4>
+                </div>
+
+                <div class="card-body p-5">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <a href="{{ path('user_new_training_apply', { 'id':training.id }) }}" class="bg-gray border_radius train_application_col w-100 p-4 lead text-center">
+                              New training
+                            </a>
+                        </div>
+                        <div class="col-md-6 ">
+                            <a href="{{ path('user_refresher_training_apply', { 'id':training.id }) }}" class="bg-gray border_radius train_application_col w-100 p-4 lead text-center">
+                            Refresher training
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="font-xs">
+
+                <b>Note</b>
+                <p>- Click on "New Training" if you have not come for the training previously and want to register participants from your MDA for this training</p>
+                <p>- Click on "Refresher Training" if you have come for the training but you wish to come again for a refresher training</p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+{% endblock %}

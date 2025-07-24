@@ -1,0 +1,22 @@
+<?php //App%255CController%255CAdminController%2523open_session
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route')),
+    ],
+    null,
+    [
+        'Symfony\\Component\\Routing\\Annotation\\Route' => [
+            'path' => [
+                '/admin/training/session/{id}/open',
+            ],
+            'name' => [
+                'admin_open_training_session',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

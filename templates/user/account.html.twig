@@ -1,0 +1,62 @@
+{% extends 'user_base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="card">
+
+        <div class="card-header bg-dark font-white">
+            <h4>Update my information</h4>
+        </div>
+
+        <div class="card-body">
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header bg-dark font-white">
+            <h4>Update password</h4>
+        </div>
+
+        <div class="card-body">
+
+
+            <form action="{{ path('user_update_password') }}" method="POST">
+
+                <div class="form-group">
+                <label>Current password</label>
+            <input type="password" name="current_password" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+                    <label>New password</label>
+                    <input type="password" name="new_password" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm new password</label>
+                    <input type="password" name="confirm_password" class="form-control">
+
+                </div>
+
+
+                <button class="btn btn-success btn-block">Update</button>
+
+            </form>
+
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'access_base.html.twig' %}
+
+{% block content %}
+
+    <h2 class="page-header pt-4">Generate MDA letter</h2>
+    <hr>
+
+    {% include 'common/nav.html.twig' %}
+
+    <div class="row pt-3 d-flex">
+
+        <div class="col-lg-7 mx-auto">
+
+            <div class="bg-dark p-3 mb-3 font-white border_radius">
+                <p class="font-xs-2 mb-0 bottom_buffer font-weight-900 text-uppercase font-green">MDA</p>
+                <h4>{{ mda }}</h4>
+
+                {# <p class="font-xs-2 mb-0 mt-3 bottom_buffer font-weight-900 text-uppercase font-green">Contact information</p>
+                 <p class="no_margin">{{ email }} • {{ phone }}</p>#}
+            </div>
+
+            <form action="{{ path('mda_letter') }}" method="POST">
+
+                <div class="form-group">
+                    <label>Select a training</label>
+                    <select name="training" class="custom-select">
+                        {% for training in trainings %}
+
+                            <option value="{{ training.id }}">{{ training.title }}</option>
+
+                            {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+
+                    <label>Training type</label> <br>
+                    <input type="radio" class="custom-radio" value="New training" name="training_type"> New training
+                    <input type="radio" class="custom-radio" value="Refresher training" name="training_type"> Refresher training
+
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+
+                    <label>Email</label> <br>
+                    <input type="text" class="form-control" name="email">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Phone</label> <br>
+                    <input type="text" class="form-control" name="phone" onkeypress="return isNumber(event)">
+
+                </div>
+
+                <input type="hidden" name="mda" value="{{ mda }}">
+
+                <button class="btn btn-block mt-3 btn-success"><i class="fa fa-file-text-o"></i> Generate Letter</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
